@@ -34,20 +34,20 @@ int main()
         PWM1 = 0;
         bool up = true;
         while(1){
-            wait(0.1);
-            if(up && PWM1<1){
-                PWM1 = PWM1+0.1;
-            }
-            else if(up && PWM1==1){
-                up = false;
-                PWM1 = PWM1-0,1;
-            }
-            else if(!up && PWM1==0){
-                up = true;
-                PWM1 = PWM1+0.1;
-            }
-            else if(!up && PWM1<1){
-                PWM1 = PWM1-0.1;
+            //wait(0.1);
+            bool up =true;
+            for(int i=0;; i++){
+                wait(0.1);
+                if(i==10){
+                    i = 0;
+                    up = !up;
+                }
+                if(up){
+                    PWM1 = PWM1 + 0.1;
+                }
+                else{
+                    PWM1 = PWM1 - 0.1;
+                }
             }
         }
     //}
