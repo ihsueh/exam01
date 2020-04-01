@@ -14,7 +14,11 @@ int main()
     uLCD.locate(0,1);
     uLCD.printf("106062225");
 
-    uLCD.line(1, 1, 1, 2, BLUE);
+    uLCD.line(20, 20, 20, 100, BLACK);
+    uLCD.line(20, 100, 100, 100, BLACK);
+    uLCD.line(100, 100, 100, 20, BLACK);
+    uLCD.line(100, 20, 20, 20, BLACK);
+
     /*
     uLCD.text_width(4); //4X size text
     uLCD.text_height(4);
