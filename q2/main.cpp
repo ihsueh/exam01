@@ -3,6 +3,8 @@
 
 uLCD_4DGL uLCD(D1, D0, D2); // serial tx, serial rx, reset pin;
 PwmOut PWM1(D6);
+AnalogIn Ain(A0);
+Serial pc( USBTX, USBRX );
 
 int main()
 {
@@ -19,36 +21,23 @@ int main()
     uLCD.line(100, 100, 100, 20, BLACK);
     uLCD.line(100, 20, 20, 20, BLACK);
 
-    /*
-    uLCD.text_width(4); //4X size text
-    uLCD.text_height(4);
-    
-    uLCD.color(GREEN);
-    for (int i=30; i>=0; --i) {
-        uLCD.locate(1,2);
-        uLCD.printf("%2D",i);
-        wait(1);
-    }*/
-    //while(1){
-        PWM1.period(0.001);
-        PWM1 = 0;
-        bool up = true;
-        while(1){
-            //wait(0.1);
-            bool up =true;
-            for(int i=0;; i++){
-                wait(0.1);
-                if(i==10){
-                    i = 0;
-                    up = !up;
-                }
-                if(up){
-                    PWM1 = PWM1 + 0.1;
-                }
-                else{
-                    PWM1 = PWM1 - 0.1;
-                }
-            }
+    PWM1.period(0.001);
+    PWM1 = 0;
+
+    bool up = true;
+    for(int i=0;; i++){
+        pc.printf("%1.3f\r\n", Ain);
+        wait(0.1);
+        if(i==10){
+            i = 0;
+            up = !up;
         }
-    //}
+        if(up){
+            PWM1 = PWM1 + 0.1;
+        }
+        else{
+            PWM1 = PWM1 - 0.1;
+        }
+    }
+
 }
